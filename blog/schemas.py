@@ -6,8 +6,9 @@ class Blog(BaseModel):
     body: str
 
 class ShowBlog(Blog):
-    class Config():
-        orm_mode = True
+    # class Config():
+    #     orm_mode = True
+    model_config = {"from_attributes": True}
 
 # class ShowBlog(BaseModel):
 #     title: str
