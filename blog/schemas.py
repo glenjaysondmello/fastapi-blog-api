@@ -19,3 +19,9 @@ class User(BaseModel):
     name: str
     email: str
     password: str
+
+class ShowUser(BaseModel):
+    name: str
+    email: str
+    
+    model_config = {"from_attributes": True}
