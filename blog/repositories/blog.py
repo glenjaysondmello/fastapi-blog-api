@@ -3,7 +3,6 @@ from .. import schemas, models
 from sqlalchemy.orm import Session
 from typing import List
 
-
 def create(request: schemas.Blog, db : Session):
     new_blog = models.Blog(title=request.title, body=request.body, user_id=1)
     db.add(new_blog)
@@ -11,11 +10,9 @@ def create(request: schemas.Blog, db : Session):
     db.refresh(new_blog)
     return new_blog
 
-
 def getAll(db : Session):
     blogs = db.query(models.Blog).all()
     return blogs
-
 
 def getOne(id: int, response: Response, db : Session):
     blog = db.query(models.Blog).filter(models.Blog.id == id).first()
@@ -25,7 +22,6 @@ def getOne(id: int, response: Response, db : Session):
         # return {"message": f"Details from ID: {id} is not Found"}
     return blog
 
-
 def destroy(id: int, db: Session):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
     if not blog.first():
@@ -33,7 +29,6 @@ def destroy(id: int, db: Session):
     blog.delete(synchronize_session=False)
     db.commit()
     return {"Done"}
-
 
 def update(id: int, request: schemas.Blog, db: Session):
     blog = db.query(models.Blog).filter(models.Blog.id == id)
