@@ -41,6 +41,10 @@ class ShowBlog(Blog):
 
     model_config = {"from_attributes": True}
 
+class Login(BaseModel):
+    username: str
+    password: str
+
 
 
     
