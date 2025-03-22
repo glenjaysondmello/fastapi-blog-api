@@ -14,12 +14,19 @@ def create_access_token(data: dict):
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
-def verify_token(token, credentials_exception):
+from sqlalchemy.orm import Session
+from . import models
+
+def verify_token(token, credentials_exception, db: Session):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email = payload.get("sub")
         if email is None:
             raise credentials_exception
-        token_data = schemas.TokenData(email=email)
+        user = db.query(models.User).filter(models.User.email == email).first()
+        if user is None:
+            raise credentials_exception
+        return user
     except InvalidTokenError:
         raise credentials_exception
+
