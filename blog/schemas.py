@@ -40,6 +40,7 @@ class ShowBlog(Blog):
     creator: ShowUser
 
     model_config = {"from_attributes": True}
+    
 
 class Login(BaseModel):
     username: str
@@ -51,7 +52,7 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str | None = None
+    email: str | None = None
 
 
 
