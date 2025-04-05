@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import List
+from typing import Optional 
 
 class BlogBase(BaseModel):
     # id: int
@@ -52,7 +53,7 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    email: str | None = None
+     email: Optional[str] = None
 
 
 
